@@ -62,51 +62,90 @@ Untuk menghentikan server, tekan `Ctrl + C` di terminal.
 
 ## 4. Kerjakan tugasnya
 
-Ada lima fitur wajib: dua di halaman Our Programs dan tiga di halaman About Us. Desain dan tata letak bebas dikreasikan, asal kelima fitur ada dan berfungsi. Kamu boleh melihat website asli sebagai inspirasi, tapi **tulis kodenya sendiri**.
+Setiap halaman punya lima fitur wajib, jadi totalnya sepuluh fitur. Desain dan tata letak bebas dikreasikan, asal semua fitur ada dan berfungsi. Kamu boleh melihat website asli sebagai inspirasi, tapi **tulis kodenya sendiri**.
 
-### Lima fitur utama
+### Ringkasan fitur
 
 | No | Fitur | Halaman | Konsep yang dilatih |
 | --- | --- | --- | --- |
-| 1 | Slider daftar program | Our Programs | Data array, `.map()`, komponen kartu, slider |
-| 2 | Featured Programs dan ajakan YouTube | Our Programs | Grid responsif, link keluar, gambar |
-| 3 | Hero About Us dengan tombol scroll | About Us | Layout hero, `useRef`, smooth scroll |
-| 4 | Timeline sejarah interaktif | About Us | `useState`, event `onClick`, tampilan kondisional |
-| 5 | Kontak dan lokasi | About Us | Link `mailto:` dan WhatsApp, embed Google Maps |
+| P1 | Hero halaman Programs | Our Programs | Layout, gambar dekorasi dengan `position: absolute` |
+| P2 | Slider tujuh program | Our Programs | Data array, `.map()`, komponen kartu, slider |
+| P3 | Deretan video program | Our Programs | Scroll horizontal, `useRef` + `scrollBy` |
+| P4 | Featured Programs | Our Programs | Grid responsif, background image, link keluar |
+| P5 | Ajakan Join Us on YouTube | Our Programs | Layout dua kolom, tombol link |
+| A1 | Hero dengan tombol Learn More | About Us | Layout layar penuh, `useRef`, smooth scroll |
+| A2 | Timeline sejarah interaktif | About Us | `useState`, `onClick`, tampilan kondisional |
+| A3 | Management Board | About Us | Import data JSON, data bertingkat |
+| A4 | Discover 8EH | About Us | Kartu dengan ikon, efek hover |
+| A5 | Kontak dan lokasi | About Us | `mailto:`, link WhatsApp, embed Google Maps |
 
-#### Fitur 1: Slider daftar program
+### Halaman Our Programs
 
-- **Isi:** judul bagian (misalnya "Discover Our Exciting Programs at 8EH Radio ITB") dan kartu untuk tujuh program: CTRL (Coba Tanya Radio Lo!), GWS (Gather With Us), WAVE, KisKasKus, OKB (Obrolan Kalcer ITB), KELAM (Kelana Malam), dan ONAIR. Tiap kartu berisi logo, nama, dan deskripsi singkat.
-- **Selesai jika:** kartu bisa digeser dengan tombol kiri/kanan (di HP boleh digeser pakai jari), dan data program disimpan di satu array lalu ditampilkan dengan `.map()`, bukan ditulis satu per satu.
-- **Bahan:** logo di `public/`: `ctrl-logo.png`, `gws-logo.png`, `logo-wave.webp`, `logo-kiskaskus.webp`, `logo-okb.webp`, `logo-kelam.webp`, `logo-onair.webp`. Library `swiper` sudah terpasang kalau mau dipakai.
+#### P1. Hero halaman Programs
 
-#### Fitur 2: Featured Programs dan ajakan YouTube
+- **Isi:** judul pembuka halaman (misalnya "Our Programs" dengan subjudul "Explore 8EH Radio ITB") dan beberapa gambar dekorasi di sisi kiri/kanan.
+- **Selesai jika:** judul tampil jelas di tengah, gambar dekorasi tidak menutupi teks, dan tampilan tetap rapi di HP.
+- **Bahan:** `vstock-programs-1.png` sampai `vstock-programs-13.png` di `public/`.
 
-- **Isi:** bagian "Featured Programs" berisi tiga kartu gambar highlight yang masing-masing membuka postingan Instagram 8EH. Di bawahnya, kotak ajakan "Join Us on Youtube" dengan tombol ke https://www.youtube.com/@8EHRadioITB.
-- **Selesai jika:** kartu tersusun rapi (berjajar di desktop, menumpuk di HP), link terbuka di tab baru, dan tombol YouTube mengarah ke kanal yang benar.
-- **Bahan:** `highlight-1.jpg`, `highlight-2.png`, `highlight-3.jpg`, `highlights-bg.png`, `youtube.png` di `public/`.
+#### P2. Slider tujuh program
 
-#### Fitur 3: Hero About Us dengan tombol scroll
+- **Isi:** kartu untuk tujuh program: CTRL (Coba Tanya Radio Lo!), GWS (Gather With Us), WAVE, KisKasKus, OKB (Obrolan Kalcer ITB), KELAM (Kelana Malam), dan ONAIR. Tiap kartu berisi logo, nama, dan deskripsi singkat.
+- **Selesai jika:** kartu bisa digeser dengan tombol kiri/kanan (di HP boleh digeser pakai jari), dan data program disimpan di satu array lalu ditampilkan dengan `.map()`.
+- **Bahan:** `ctrl-logo.png`, `gws-logo.png`, `logo-wave.webp`, `logo-kiskaskus.webp`, `logo-okb.webp`, `logo-kelam.webp`, `logo-onair.webp` di `public/`. Library `swiper` sudah terpasang kalau mau dipakai.
+
+#### P3. Deretan video program
+
+- **Isi:** judul bagian (misalnya "Discover Our Exciting Programs at 8EH Radio ITB") dan minimal empat kartu video dari kanal YouTube 8EH (https://www.youtube.com/@8EHRadioITB). Tiap kartu berisi thumbnail dan judul video.
+- **Selesai jika:** kartu berjajar menyamping, bisa digulir dengan tombol panah kiri/kanan, dan klik kartu membuka videonya di YouTube pada tab baru.
+- **Bahan:** di website asli data video diambil dari database. Di tugas ini, tulis datanya sendiri di array. Thumbnail bisa diambil dari `https://img.youtube.com/vi/<ID_VIDEO>/hqdefault.jpg`; pakai tag `<img>` biasa, bukan `next/image`, karena domain itu belum diizinkan di konfigurasi.
+
+#### P4. Featured Programs
+
+- **Isi:** bagian berjudul "Featured Programs" dengan latar gambar dan tiga kartu gambar highlight. Tiap kartu membuka postingan di Instagram 8EH (https://instagram.com/8ehradioitb).
+- **Selesai jika:** kartu berjajar di desktop dan menumpuk di HP, ada efek saat kursor diarahkan (hover), dan link terbuka di tab baru.
+- **Bahan:** `highlights-bg.png`, `highlight-1.jpg`, `highlight-2.png`, `highlight-3.jpg` di `public/`.
+
+#### P5. Ajakan Join Us on YouTube
+
+- **Isi:** kotak ajakan berjudul "Join Us on Youtube" dengan kalimat singkat dan tombol ke https://www.youtube.com/@8EHRadioITB.
+- **Selesai jika:** teks di kiri dan tombol di kanan pada desktop, bertumpuk di HP, dan tombol mengarah ke kanal yang benar.
+- **Bahan:** `youtube.png` di `public/`.
+
+### Halaman About Us
+
+#### A1. Hero dengan tombol Learn More
 
 - **Isi:** bagian pembuka layar penuh dengan judul besar "8EH Radio ITB", tagline singkat (misalnya tentang menyatukan komunitas ITB lewat konten kreatif), dan tombol "Learn More".
-- **Selesai jika:** tombol "Learn More" menggulir halaman dengan halus ke bagian timeline (Fitur 4), dan judul tetap terbaca di layar HP.
+- **Selesai jika:** tombol "Learn More" menggulir halaman dengan halus ke bagian timeline (A2), dan judul tetap terbaca di HP.
 - **Bahan:** `useRef` + `scrollIntoView({ behavior: "smooth" })`, komponen `ButtonPrimary`, gambar `vstock-aboutus-*.svg`.
 
-#### Fitur 4: Timeline sejarah interaktif
+#### A2. Timeline sejarah interaktif
 
 - **Isi:** bagian "Our Journey" dengan tiga tombol tahun: **1963** (8EH didirikan mahasiswa Teknik Elektro ITB dan mendapat call sign "8EH"), **1978** (stasiun disegel karena aktivitas kritis pada masa Orde Baru), dan **1999** (8EH kembali mengudara di 107.9 FM).
-- **Selesai jika:** mengklik satu tahun mengganti teks cerita yang tampil, dan tombol tahun yang aktif terlihat berbeda dari yang lain.
-- **Bahan:** `useState` untuk menyimpan tahun yang dipilih, gambar `mic-vstock.png`. Ingat menambahkan `"use client";` di baris paling atas.
+- **Selesai jika:** mengklik satu tahun mengganti teks cerita yang tampil, dan tombol tahun yang aktif terlihat berbeda.
+- **Bahan:** `useState` untuk tahun yang dipilih, gambar `mic-vstock.png`. Tambahkan `"use client";` di baris paling atas.
 
-#### Fitur 5: Kontak dan lokasi
+#### A3. Management Board
+
+- **Isi:** bagian "Management Board" (subjudul: "Temui para personel keren dibalik 8EH Radio ITB") yang menampilkan pengurus: nama, jabatan, dan angkatan, plus link Instagram/LinkedIn kalau ada.
+- **Selesai jika:** data diambil dari file JSON (bukan diketik ulang), semua pengurus tampil termasuk yang ada di dalam `children`, dan tampilan rapi di HP.
+- **Bahan:** `public/data/management-board.json`, bisa di-import langsung: `import boardData from "@/public/data/management-board.json";`. Datanya bertingkat (General Manager, lalu `children` berisi divisi di bawahnya). Foto pengurus tidak tersedia tanpa `.env`, jadi pakai placeholder, misalnya lingkaran berisi inisial nama.
+
+#### A4. Discover 8EH
+
+- **Isi:** bagian "Discover the vibrant world of 8EH Radio ITB" dengan tiga kartu: **Creative Content Hub**, **Production Excellence**, dan **Interactive Community**. Tiap kartu berisi ikon, judul, dan deskripsi singkat.
+- **Selesai jika:** tiga kartu berjajar di desktop dan menumpuk di HP, ada efek hover (misalnya kartu sedikit naik atau judul berubah warna), dan data kartu disimpan di array.
+- **Bahan:** ikon bisa SVG dari https://heroicons.com atau emoji; gambar `vstock-3.png` dan `vstock-4.png` untuk dekorasi.
+
+#### A5. Kontak dan lokasi
 
 - **Isi:** bagian "Get in Touch" berisi email (`8eh_itb@km.itb.ac.id`), WhatsApp, alamat studio, dan peta lokasi studio di ITB.
 - **Selesai jika:** klik email membuka aplikasi email (`mailto:`), klik WhatsApp membuka chat (`https://wa.me/...`), dan peta Google Maps tampil lewat `<iframe>`.
-- **Bahan:** buka Google Maps, cari lokasi studio, lalu pilih **Share → Embed a map** dan salin kode `<iframe>`-nya.
+- **Bahan:** buka Google Maps, cari lokasi studio, pilih **Share → Embed a map**, lalu salin kode `<iframe>`-nya.
 
 ### Bonus (tidak wajib)
 
-Bagian lain di website asli boleh dikerjakan kalau masih ada waktu: Management Board, kartu "Discover", dan testimoni "Student Voices" di About Us. Bagian video program dari YouTube tidak perlu dikerjakan karena butuh database.
+Kalau masih ada waktu, tambahkan bagian testimoni "Student Voices" di About Us: kartu berisi kutipan, nama, foto, dan bintang lima.
 
 ### Aturan
 
@@ -168,7 +207,7 @@ PR tidak akan di-merge. PR dipakai untuk review dan feedback dari pengurus.
 
 - [ ] Halaman `/programs` sudah terisi dan tampil tanpa error
 - [ ] Halaman `/about-us` sudah terisi dan tampil tanpa error
-- [ ] Kelima fitur utama ada dan memenuhi kriteria "Selesai jika"
+- [ ] Kesepuluh fitur (5 per halaman) ada dan memenuhi kriteria "Selesai jika"
 - [ ] Navbar dan Footer tetap ada di kedua halaman
 - [ ] Tampilan rapi di desktop dan HP
 - [ ] Tidak ada file di luar tugas yang berubah
