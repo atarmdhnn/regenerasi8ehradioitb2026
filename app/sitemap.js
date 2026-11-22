@@ -63,38 +63,43 @@ export default async function sitemap() {
     },
   ];
 
-  // Dynamic blog posts
-  const blogPosts = await prisma.blogPost.findMany({
-    select: {
-      slug: true,
-      updatedAt: true,
-    },
-    where: {
-      // Add any filters if needed
-    },
-  });
+  // Tanpa database (mis. tidak ada .env), sitemap cukup berisi halaman statis.
+  try {
+    // Dynamic blog posts
+    const blogPosts = await prisma.blogPost.findMany({
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+      where: {
+        // Add any filters if needed
+      },
+    });
 
-  const blogUrls = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: post.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+    const blogUrls = blogPosts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
 
-  // Dynamic podcasts
-  const podcasts = await prisma.podcast.findMany({
-    select: {
-      id: true,
-      updatedAt: true,
-    },
-  });
+    // Dynamic podcasts
+    const podcasts = await prisma.podcast.findMany({
+      select: {
+        id: true,
+        updatedAt: true,
+      },
+    });
 
-  const podcastUrls = podcasts.map((podcast) => ({
-    url: `${baseUrl}/podcast/${podcast.id}`,
-    lastModified: podcast.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+    const podcastUrls = podcasts.map((podcast) => ({
+      url: `${baseUrl}/podcast/${podcast.id}`,
+      lastModified: podcast.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
 
-  return [...staticPages, ...blogUrls, ...podcastUrls];
+    return [...staticPages, ...blogUrls, ...podcastUrls];
+  } catch {
+    return staticPages;
+  }
 } 

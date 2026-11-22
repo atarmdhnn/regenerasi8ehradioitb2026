@@ -42,30 +42,25 @@ cd regenerasi8ehradioitb2026
 
 Kamu bekerja langsung di branch `main` milik fork-mu. Tidak perlu membuat branch.
 
-## 3. Siapkan file `.env`
-
-Salin contoh file environment:
-
-```bash
-cp .env.example .env
-```
-
-Lalu isi nilainya. **Nilai `.env` minta ke pengurus**, akan dibagikan lewat jalur privat.
-
-> ⚠️ Jangan pernah commit atau membagikan file `.env` ke siapa pun. File ini berisi kunci rahasia dan sudah otomatis diabaikan Git.
-
-## 4. Jalankan website
+## 3. Jalankan website
 
 ```bash
 bun install
 bun dev
 ```
 
-Buka http://localhost:3000. Coba klik ke **Programs** dan **About Us**: halamannya masih kosong, hanya ada Navbar dan Footer. Setiap kali kamu menyimpan file, browser otomatis ter-update.
+Tidak perlu menyiapkan file `.env`. Langsung buka:
+
+- http://localhost:3000/programs
+- http://localhost:3000/about-us
+
+Kedua halaman masih kosong, hanya ada Navbar dan Footer. Setiap kali kamu menyimpan file, browser otomatis ter-update.
+
+> Tanpa `.env`, website tidak tersambung ke database. Karena itu **beranda (`/`), blog, podcast, login, dan pemutar radio tidak berfungsi**. Ini normal dan tidak perlu diperbaiki: tugasmu hanya di dua halaman di atas.
 
 Untuk menghentikan server, tekan `Ctrl + C` di terminal.
 
-## 5. Kerjakan tugasnya
+## 4. Kerjakan tugasnya
 
 ### Yang harus dibuat
 
@@ -127,7 +122,7 @@ Isi dan desain bebas dikreasikan. Kamu boleh melihat website asli sebagai inspir
 
   Kalau build gagal dengan error soal `next/font/google`, biasanya karena internet putus saat mengunduh font. Cek koneksi lalu jalankan ulang.
 
-## 6. Kumpulkan
+## 5. Kumpulkan
 
 1. Pastikan semua perubahan sudah di-`push` ke fork-mu.
 2. Buka fork-mu di GitHub, klik **Contribute → Open pull request**. Pastikan arahnya ke `atarmdhnn/regenerasi8ehradioitb2026` branch `main`.
@@ -146,7 +141,6 @@ PR tidak akan di-merge. PR dipakai untuk review dan feedback dari pengurus.
 - [ ] Navbar dan Footer tetap ada di kedua halaman
 - [ ] Tampilan rapi di desktop dan HP
 - [ ] Tidak ada file di luar tugas yang berubah
-- [ ] File `.env` **tidak** ikut ter-commit
 - [ ] `bun run build` berhasil
 - [ ] PR sudah dibuat dengan screenshot
 

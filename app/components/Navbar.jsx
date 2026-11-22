@@ -44,13 +44,15 @@ export default function Navbar() {
       .then((res) => res.json())
       .then((data) =>
         setOnAir(typeof data?.onAir === "boolean" ? data.onAir : true),
-      );
+      )
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
     fetch("/api/player-config")
       .then((res) => res.json())
-      .then((data) => setPlayerTitle(data?.title || ""));
+      .then((data) => setPlayerTitle(data?.title || ""))
+      .catch(() => {});
   }, []);
 
   const discoverLinks = (
