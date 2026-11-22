@@ -1,0 +1,563 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  DEVELOPER
+  TECHNIC
+  REPORTER
+  KRU
+  MUSIC
+}
+
+enum PublishStatus {
+  draft
+  published
+}
+
+model ParticipantProfile {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  displayName String?
+  biodata     Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  submissions EventSubmission[]
+  claimRequests ProfileClaimRequest[]
+
+  @@unique([userId])
+}
+
+model ProfileClaimRequest {
+  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  requesterUserId     String              @db.ObjectId
+  requesterUser       User                @relation("ProfileClaimRequester", fields: [requesterUserId], references: [id])
+  requesterEmail      String
+  targetProfileId     String?             @db.ObjectId
+  targetProfile       ParticipantProfile? @relation(fields: [targetProfileId], references: [id])
+  nimInput            String
+  emergencyLast4Input String?
+  status              String              @default("PENDING")
+  reason              String?
+  cooldownUntil       DateTime?
+  reviewedById        String?             @db.ObjectId
+  reviewedBy          User?               @relation("ProfileClaimReviewer", fields: [reviewedById], references: [id])
+  reviewedAt          DateTime?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+
+  @@index([requesterUserId, createdAt])
+  @@index([status, createdAt])
+}
+
+model ProfileFieldCatalog {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  key         String   @unique
+  label       String
+  description String?
+  fieldType   String
+  isRequired  Boolean  @default(false)
+  options     Json?
+  metadata    Json?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Event {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String        @unique
+  title       String
+  description String?
+  startsAt    DateTime?
+  endsAt      DateTime?
+  status      PublishStatus @default(draft)
+  createdById String        @db.ObjectId
+  createdBy   User          @relation(fields: [createdById], references: [id])
+  metadata    Json?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  organizers   EventOrganizer[]
+  formVersions EventFormVersion[]
+  submissions  EventSubmission[]
+  exportLogs   EventExportLog[]
+}
+
+model EventOrganizer {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  eventId   String   @db.ObjectId
+  event     Event    @relation(fields: [eventId], references: [id])
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  role      String?
+  createdAt DateTime @default(now())
+
+  @@unique([eventId, userId])
+}
+
+model EventFormVersion {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  eventId        String        @db.ObjectId
+  event          Event         @relation(fields: [eventId], references: [id])
+  version        Int
+  status         PublishStatus @default(draft)
+  title          String?
+  formSchema     Json
+  consentText    String
+  consentVersion String
+  publishedAt    DateTime?
+  createdById    String?       @db.ObjectId
+  createdBy      User?         @relation(fields: [createdById], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  submissions EventSubmission[]
+
+  @@unique([eventId, version])
+}
+
+model EventSubmission {
+  id                       String              @id @default(auto()) @map("_id") @db.ObjectId
+  eventId                  String              @db.ObjectId
+  event                    Event               @relation(fields: [eventId], references: [id])
+  formVersionId            String              @db.ObjectId
+  formVersion              EventFormVersion    @relation(fields: [formVersionId], references: [id])
+  participantProfileId     String?             @db.ObjectId
+  participantProfile       ParticipantProfile? @relation(fields: [participantProfileId], references: [id])
+  submitterUserId          String?             @db.ObjectId
+  submitterUser            User?               @relation(fields: [submitterUserId], references: [id])
+  respondentEmail          String?
+  status                   String?
+  answers                  Json
+  formSchemaSnapshot       Json
+  consentedProfileSnapshot Json
+  consentTextSnapshot      String
+  consentVersion           String
+  submittedAt              DateTime            @default(now())
+  updatedAt                DateTime            @updatedAt
+
+  @@index([eventId, submittedAt])
+  @@index([eventId, respondentEmail, submittedAt])
+}
+
+model EventExportLog {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  eventId       String   @db.ObjectId
+  event         Event    @relation(fields: [eventId], references: [id])
+  requestedById String   @db.ObjectId
+  requestedBy   User     @relation(fields: [requestedById], references: [id])
+  exportType    String
+  filters       Json?
+  rowCount      Int?
+  fileUrl       String?
+  createdAt     DateTime @default(now())
+}
+
+model User {
+  id                 String              @id @default(auto()) @map("_id") @db.ObjectId
+  name               String?
+  email              String?             @unique
+  emailVerified      DateTime?
+  image              String?
+  role               String              @default("KRU")
+  createdAt          DateTime            @default(now())
+  authored           AuthorOnPost[]
+  accounts           Account[]
+  sessions           Session[]
+  shortLinks         ShortLink[]
+  podcasts           Podcast[]
+  participantProfile ParticipantProfile?
+  profileClaimRequests ProfileClaimRequest[] @relation("ProfileClaimRequester")
+  reviewedProfileClaimRequests ProfileClaimRequest[] @relation("ProfileClaimReviewer")
+  events             Event[]
+  eventOrganizers    EventOrganizer[]
+  eventFormVersions  EventFormVersion[]
+  eventSubmissions   EventSubmission[]
+  eventExportLogs    EventExportLog[]
+}
+
+model BlogPost {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String         @unique
+  content     String
+  description String?
+  readTime    String?
+  category    String?
+  mainImage   String?
+  tags        String[]
+  isFeatured  Boolean        @default(false)
+  authors     AuthorOnPost[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model AuthorOnPost {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  user   User     @relation(fields: [userId], references: [id])
+  userId String   @db.ObjectId
+  post   BlogPost @relation(fields: [postId], references: [id])
+  postId String   @db.ObjectId
+}
+
+model ShortLink {
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  destination String
+  slug        String           @unique
+  title       String?
+  domain      String           @default("8eh.link")
+  password    String?
+  isActive    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  userId      String           @db.ObjectId
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clicks      ShortLinkClick[]
+}
+
+model ShortLinkClick {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  shortLinkId String    @db.ObjectId
+  shortLink   ShortLink @relation(fields: [shortLinkId], references: [id], onDelete: Cascade)
+  ipAddress   String?
+  userAgent   String?
+  referer     String?
+  country     String?
+  city        String?
+  clickedAt   DateTime  @default(now())
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?    @db.Int
+  token_type        String? @db.String
+  scope             String? @db.String
+  id_token          String? @db.String
+  session_state     String? @db.String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@index([identifier], map: "token_identifier_index")
+}
+
+model WhitelistedEmail {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Podcast {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  subtitle    String?
+  description String
+  date        String?
+  duration    String?
+  audioUrl    String
+  image       String?
+  coverImage  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+}
+
+model PlayerConfig {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  subtitle    String?
+  coverImage  String?
+  coverImages String[] // semua cover image yang pernah diupload
+  updatedAt   DateTime @updatedAt
+}
+
+model StreamConfig {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  baseUrls    String[]
+  defaultUrl  String
+  fallbackUrl String
+  onAir       Boolean  @default(true)
+  liveChatEnabled Boolean @default(true)
+  songRequestEnabled Boolean @default(true)
+  updatedAt   DateTime @updatedAt
+}
+
+model TuneTrackerEntry {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  order            Int      @unique // 1-10, chart position
+  title            String
+  artist           String
+  coverImage       String? // R2 key or external URL (iTunes artwork)
+  audioUrl         String? // R2 key for manually uploaded audio
+  itunesPreviewUrl String? // iTunes 30s preview URL
+  itunesTrackId    String? // iTunes track ID for reference
+  sourceType       String? // "ITUNES" | "AUDIO_URL" | "MANUAL"
+  updatedAt        DateTime @updatedAt
+}
+
+model TuneTrackerMeta {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  curatedBy   String?
+  editionDate DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model NowPlayingPlaylist {
+  id        String                   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  isActive  Boolean                  @default(true)
+  createdAt DateTime                 @default(now())
+  updatedAt DateTime                 @updatedAt
+  items     NowPlayingPlaylistItem[]
+}
+
+model NowPlayingPlaylistItem {
+  id         String             @id @default(auto()) @map("_id") @db.ObjectId
+  playlistId String             @db.ObjectId
+  playlist   NowPlayingPlaylist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  title      String
+  artist     String
+  coverImage String?
+  order      Int
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+}
+
+model NowPlayingState {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  key        String    @unique @default("main")
+  source     String    @default("manual-playlist")
+  playlistId String?   @db.ObjectId
+  itemId     String?   @db.ObjectId
+  title      String?
+  artist     String?
+  coverImage String?
+  isActive   Boolean   @default(false)
+  startedAt  DateTime?
+  updatedBy  String?
+  // siapa yang pegang kendali tampilan now playing:
+  // "manual" = dashboard, "agent-auto"/"agent-program" = companion, null = bebas
+  control    String?
+  // device yang DIPILIH dashboard sebagai sumber metadata aktif
+  // (StudioDevice.deviceId). Kalau null = aturan lama (terakhir menang).
+  activeDeviceId String?
+  updatedAt  DateTime  @updatedAt
+}
+
+// Akun khusus aplikasi 8EH Studio (broadcaster & companion).
+// Dibuat admin; kru login dengan username/password di app —
+// app lalu menerima token perangkat via /api/studio/session,
+// sehingga kru tidak pernah berurusan dengan token manual.
+model StudioAccount {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  username       String    @unique
+  displayName    String
+  passwordHash   String
+  // "broadcaster" boleh streaming + metadata; "companion" hanya metadata
+  role           String    @default("broadcaster")
+  active         Boolean   @default(true)
+  lastLoginAt    DateTime?
+  createdAt      DateTime  @default(now())
+}
+
+// Perangkat yang terhubung ke app 8EH Studio via Google login (device link).
+// scope "broadcast" = siaran + metadata (TECHNIC/DEVELOPER),
+// scope "metadata"   = hanya metadata (MUSIC).
+// metadataEnabled   = bisa dimatikan dashboard agar device technic
+//                     tidak saling menabrak laptop music.
+model StudioDevice {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  deviceId        String    @unique // random per instalasi app (rahasia perangkat)
+  deviceName      String
+  token           String    @unique // dikirim app sebagai X-Device-Token
+  ownerName       String?
+  scope           String    @default("metadata")
+  metadataEnabled Boolean   @default(true)
+  active          Boolean   @default(true)
+  lastSeenAt      DateTime?
+  createdAt       DateTime  @default(now())
+}
+
+// Link request sementara saat app 8EH Studio pairing lewat Google login.
+// sid rahasia dipakai app untuk polling sampai disetujui/ditolak.
+model StudioDeviceLink {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  sid        String   @unique
+  deviceId   String   @unique
+  deviceName String
+  ownerName  String?
+  scope      String   @default("metadata")
+  status     String   @default("pending") // pending | approved | denied
+  createdAt  DateTime @default(now())
+}
+
+model AzuraCastListenerSnapshot {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  stationId String
+  current   Int?
+  unique    Int?
+  total     Int?
+  source    String?
+  createdAt DateTime @default(now())
+
+  @@index([stationId, createdAt])
+}
+
+model BroadcastServerState {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  key                String    @unique @default("main")
+  status             String    @default("idle")
+  phase              String    @default("idle")
+  latestSnapshotId   String?
+  previousSnapshotId String?
+  pendingSnapshotId  String?
+  activeServerId     String?
+  activeServerIp     String?
+  serverName         String?
+  lastAction         String?
+  lastError          String?
+  startedBy          String?
+  endedBy            String?
+  startedAt          DateTime?
+  endedAt            DateTime?
+  autoEndAt          DateTime?
+  autoEndStartedAt   DateTime?
+  lastWatchdogAt     DateTime?
+  lastWatchdogAction String?
+  sourcePasswordRotatedAt DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model ProgramVideo {
+  id           String   @id @default(cuid()) @map("_id")
+  title        String
+  link         String
+  thumbnail    String
+  thumbnailKey String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+
+// ── Broadcast (satu sesi siaran) ──────────────────────
+// Direferensikan oleh GuestSession/ChatRoom/ChatMessage/SongRequest
+// via field `broadcastId` (string ObjectId). Aktif saat StreamConfig.onAir=true.
+model Broadcast {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  isActive  Boolean   @default(true)
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ── Guest Session ─────────────────────────────────────
+model GuestSession {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId          String    @unique
+  guestName          String
+  ipAddress          String?
+  isMuted            Boolean   @default(false)
+  mutedById          String?   @db.ObjectId // admin yang melakukan mute (audit trail)
+  mutedAt            DateTime? // kapan mute terjadi (audit trail)
+  requestCount       Int       @default(0)
+  requestWindowStart DateTime? // mulai window rate-limit 60 detik (lib/rate-limit.ts)
+  broadcastId        String?   @db.ObjectId
+  expiresAt          DateTime
+  createdAt          DateTime  @default(now())
+
+  chatMessages ChatMessage[]
+  songRequests SongRequest[]
+
+  @@index([broadcastId])
+}
+
+// ── Live Chat ─────────────────────────────────────────
+model ChatRoom {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  broadcastId String?  @db.ObjectId     // terikat ke sesi siaran
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  closedAt    DateTime?
+
+  messages    ChatMessage[]
+}
+
+model ChatMessage {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  roomId        String       @db.ObjectId
+  room          ChatRoom     @relation(fields: [roomId], references: [id])
+  sessionId     String       @db.ObjectId
+  guestSession  GuestSession @relation(fields: [sessionId], references: [id])
+  guestName     String       // denormalized untuk performa
+  content       String
+  isDeleted     Boolean      @default(false)
+  deletedById   String?      @db.ObjectId  // admin yang hapus
+  deletedAt     DateTime?
+  createdAt     DateTime     @default(now())
+
+  @@index([roomId, createdAt])
+}
+
+// ── Song Request ──────────────────────────────────────
+enum SongRequestStatus {
+  PENDING
+  QUEUED
+  NOW_PLAYING
+  DONE
+  REJECTED
+}
+
+model SongRequest {
+  id            String            @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId     String            @db.ObjectId
+  guestSession  GuestSession      @relation(fields: [sessionId], references: [id])
+  guestName     String            // denormalized
+  songTitle     String
+  songArtist    String
+  songCoverUrl  String?
+  itunesTrackId String?
+  message       String?           // pesan opsional dari pendengar
+  status        SongRequestStatus @default(PENDING)
+  rejectedReason String?
+  broadcastId   String?  @db.ObjectId
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([broadcastId, status])
+  @@index([sessionId])
+  @@index([status, createdAt])
+}

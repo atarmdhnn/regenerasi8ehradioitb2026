@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-plus-jakarta-sans);
+  --font-body: var(--font-arimo);
+  --font-accent: var(--font-instrument-serif);
+}
+
+.font-plus-jakarta-sans {
+  font-family: var(--font-plus-jakarta-sans), system-ui, sans-serif;
+}
+
+.\!font-plus-jakarta-sans {
+  font-family: var(--font-plus-jakarta-sans), system-ui, sans-serif !important;
+}
+
+.font-geist-sans {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  @keyframes marquee-infinite {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee-infinite {
+    animation: marquee-infinite 20s linear infinite;
+  }
+
+  @keyframes player-title-marquee {
+    0%,
+    15% {
+      transform: translateX(0);
+    }
+    85%,
+    100% {
+      transform: translateX(calc(-100% + var(--player-title-width, 15rem)));
+    }
+  }
+
+  .animate-player-title-marquee {
+    animation: player-title-marquee 14s linear infinite;
+  }
+
+  /* Smooth spinner */
+  @keyframes spinner-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinner {
+    animation: spinner-rotate 900ms linear infinite;
+  }
+
+  /* Toast slide-in animation */
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+  }
+
+  /*
+   * Safari iOS long viewport-safe height.
+   * Keep this utility for full-page wrappers instead of plain min-h-screen.
+   */
+  .min-h-safe-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  @supports (min-height: 100lvh) {
+    .min-h-safe-screen {
+      min-height: 100lvh;
+    }
+  }
+
+  .pb-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@layer components {
+  .form-builder-surface input:not([type="checkbox"]):not([type="radio"]),
+  .form-builder-surface select,
+  .form-builder-surface textarea {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+    color: #0f172a;
+  }
+
+  .form-builder-surface input:not([type="checkbox"]):not([type="radio"])::placeholder,
+  .form-builder-surface textarea::placeholder {
+    color: #64748b;
+    opacity: 1;
+  }
+
+  .form-builder-surface input:not([type="checkbox"]):not([type="radio"]):focus,
+  .form-builder-surface select:focus,
+  .form-builder-surface textarea:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.14);
+    outline: none;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+
+/* Restore list styles stripped by Tailwind preflight inside the MD editor preview */
+.wmde-markdown ol {
+  list-style-type: decimal;
+  padding-left: 2em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.wmde-markdown ul {
+  list-style-type: disc;
+  padding-left: 2em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.wmde-markdown ol ol,
+.wmde-markdown ul ul,
+.wmde-markdown ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
