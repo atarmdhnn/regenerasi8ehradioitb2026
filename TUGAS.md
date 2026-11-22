@@ -62,21 +62,51 @@ Untuk menghentikan server, tekan `Ctrl + C` di terminal.
 
 ## 4. Kerjakan tugasnya
 
-### Yang harus dibuat
+Ada lima fitur wajib: dua di halaman Our Programs dan tiga di halaman About Us. Desain dan tata letak bebas dikreasikan, asal kelima fitur ada dan berfungsi. Kamu boleh melihat website asli sebagai inspirasi, tapi **tulis kodenya sendiri**.
 
-**Our Programs** (`app/programs/page.jsx`): halaman yang memperkenalkan program-program siaran 8EH, misalnya:
-- Hero / judul halaman
-- Daftar program (podcast, siaran, dll.)
-- Highlight atau dokumentasi kegiatan
-- Ajakan (CTA) untuk menonton YouTube 8EH: https://www.youtube.com/@8EHRadioITB
+### Lima fitur utama
 
-**About Us** (`app/about-us/page.jsx`): halaman tentang 8EH, misalnya:
-- Hero / perkenalan 8EH Radio ITB
-- Sejarah singkat 8EH (berdiri 1963, call sign "8EH", kembali mengudara 1999)
-- Visi / nilai organisasi
-- Lokasi studio (bisa pakai embed Google Maps)
+| No | Fitur | Halaman | Konsep yang dilatih |
+| --- | --- | --- | --- |
+| 1 | Slider daftar program | Our Programs | Data array, `.map()`, komponen kartu, slider |
+| 2 | Featured Programs dan ajakan YouTube | Our Programs | Grid responsif, link keluar, gambar |
+| 3 | Hero About Us dengan tombol scroll | About Us | Layout hero, `useRef`, smooth scroll |
+| 4 | Timeline sejarah interaktif | About Us | `useState`, event `onClick`, tampilan kondisional |
+| 5 | Kontak dan lokasi | About Us | Link `mailto:` dan WhatsApp, embed Google Maps |
 
-Isi dan desain bebas dikreasikan. Kamu boleh melihat website asli sebagai inspirasi, tapi **tulis kodenya sendiri**.
+#### Fitur 1: Slider daftar program
+
+- **Isi:** judul bagian (misalnya "Discover Our Exciting Programs at 8EH Radio ITB") dan kartu untuk tujuh program: CTRL (Coba Tanya Radio Lo!), GWS (Gather With Us), WAVE, KisKasKus, OKB (Obrolan Kalcer ITB), KELAM (Kelana Malam), dan ONAIR. Tiap kartu berisi logo, nama, dan deskripsi singkat.
+- **Selesai jika:** kartu bisa digeser dengan tombol kiri/kanan (di HP boleh digeser pakai jari), dan data program disimpan di satu array lalu ditampilkan dengan `.map()`, bukan ditulis satu per satu.
+- **Bahan:** logo di `public/`: `ctrl-logo.png`, `gws-logo.png`, `logo-wave.webp`, `logo-kiskaskus.webp`, `logo-okb.webp`, `logo-kelam.webp`, `logo-onair.webp`. Library `swiper` sudah terpasang kalau mau dipakai.
+
+#### Fitur 2: Featured Programs dan ajakan YouTube
+
+- **Isi:** bagian "Featured Programs" berisi tiga kartu gambar highlight yang masing-masing membuka postingan Instagram 8EH. Di bawahnya, kotak ajakan "Join Us on Youtube" dengan tombol ke https://www.youtube.com/@8EHRadioITB.
+- **Selesai jika:** kartu tersusun rapi (berjajar di desktop, menumpuk di HP), link terbuka di tab baru, dan tombol YouTube mengarah ke kanal yang benar.
+- **Bahan:** `highlight-1.jpg`, `highlight-2.png`, `highlight-3.jpg`, `highlights-bg.png`, `youtube.png` di `public/`.
+
+#### Fitur 3: Hero About Us dengan tombol scroll
+
+- **Isi:** bagian pembuka layar penuh dengan judul besar "8EH Radio ITB", tagline singkat (misalnya tentang menyatukan komunitas ITB lewat konten kreatif), dan tombol "Learn More".
+- **Selesai jika:** tombol "Learn More" menggulir halaman dengan halus ke bagian timeline (Fitur 4), dan judul tetap terbaca di layar HP.
+- **Bahan:** `useRef` + `scrollIntoView({ behavior: "smooth" })`, komponen `ButtonPrimary`, gambar `vstock-aboutus-*.svg`.
+
+#### Fitur 4: Timeline sejarah interaktif
+
+- **Isi:** bagian "Our Journey" dengan tiga tombol tahun: **1963** (8EH didirikan mahasiswa Teknik Elektro ITB dan mendapat call sign "8EH"), **1978** (stasiun disegel karena aktivitas kritis pada masa Orde Baru), dan **1999** (8EH kembali mengudara di 107.9 FM).
+- **Selesai jika:** mengklik satu tahun mengganti teks cerita yang tampil, dan tombol tahun yang aktif terlihat berbeda dari yang lain.
+- **Bahan:** `useState` untuk menyimpan tahun yang dipilih, gambar `mic-vstock.png`. Ingat menambahkan `"use client";` di baris paling atas.
+
+#### Fitur 5: Kontak dan lokasi
+
+- **Isi:** bagian "Get in Touch" berisi email (`8eh_itb@km.itb.ac.id`), WhatsApp, alamat studio, dan peta lokasi studio di ITB.
+- **Selesai jika:** klik email membuka aplikasi email (`mailto:`), klik WhatsApp membuka chat (`https://wa.me/...`), dan peta Google Maps tampil lewat `<iframe>`.
+- **Bahan:** buka Google Maps, cari lokasi studio, lalu pilih **Share → Embed a map** dan salin kode `<iframe>`-nya.
+
+### Bonus (tidak wajib)
+
+Bagian lain di website asli boleh dikerjakan kalau masih ada waktu: Management Board, kartu "Discover", dan testimoni "Student Voices" di About Us. Bagian video program dari YouTube tidak perlu dikerjakan karena butuh database.
 
 ### Aturan
 
@@ -138,6 +168,7 @@ PR tidak akan di-merge. PR dipakai untuk review dan feedback dari pengurus.
 
 - [ ] Halaman `/programs` sudah terisi dan tampil tanpa error
 - [ ] Halaman `/about-us` sudah terisi dan tampil tanpa error
+- [ ] Kelima fitur utama ada dan memenuhi kriteria "Selesai jika"
 - [ ] Navbar dan Footer tetap ada di kedua halaman
 - [ ] Tampilan rapi di desktop dan HP
 - [ ] Tidak ada file di luar tugas yang berubah
