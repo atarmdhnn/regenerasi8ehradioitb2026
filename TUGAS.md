@@ -145,7 +145,7 @@ Desain dan tata letak bebas dikreasikan, asal semua fitur ada dan berfungsi. Sep
 
 #### A1. Hero dengan tombol Learn More
 
-- **Isi:** bagian pembuka layar penuh dengan judul besar "8EH Radio ITB", tagline singkat (misalnya tentang menyatukan komunitas ITB lewat konten kreatif), dan tombol "Learn More".
+- **Isi:** bagian pembuka layar penuh dengan judul "8EH Radio ITB", tagline singkat (misalnya tentang menyatukan komunitas ITB lewat konten kreatif), dan tombol "Learn More".
 - **Selesai jika:** tombol "Learn More" menggulir halaman dengan halus ke bagian timeline (A2), dan judul tetap terbaca di HP.
 - **Bahan:** bagian A2 memakai `id="our-journey"`, jadi tombolnya cukup memanggil `document.getElementById("our-journey").scrollIntoView({ behavior: "smooth" })`. Komponen `ButtonPrimary` dan gambar `vstock-aboutus-*.svg` bisa dipakai.
 
