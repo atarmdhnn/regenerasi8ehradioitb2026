@@ -3,13 +3,11 @@
 import { useRef } from "react";
 import ButtonPrimary from "@/app/components/ButtonPrimary";
 
-export default function LearnMoreButton() {
+export default function LearnMoreButton({ targetId = "our-journey" }) {
   const targetRef = useRef(null);
 
   const handleClick = () => {
-    if (!targetRef.current) {
-      targetRef.current = document.getElementById("our-journey");
-    }
+    targetRef.current ??= document.getElementById(targetId);
     targetRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
