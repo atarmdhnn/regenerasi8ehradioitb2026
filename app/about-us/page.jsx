@@ -29,19 +29,28 @@ export default function AboutUsPage() {
               <div className="w-6 h-6 mt-1 flex-shrink-0 text-gray-600">
 
               </div>
-
+              <div>
+                <h3 className="font-body font-bold text-lg text-gray-900 mb-1">Email</h3>
+                <a href="mailto:8eh_itb@km.itb.ac.id" className="font-body text-gray-700 hover:underline">8eh_itb@km.itb.ac.id</a>
+              </div>
             </div>
             <div className="flex items-start space-x-4">
               <div className="w-6 h-6 mt-1 flex-shrink-0 text-gray-600">
                 
               </div>
-
+              <div>
+                <h3 className="font-body font-bold text-lg text-gray-900 mb-1">Phone</h3>
+                <a href="https://wa.me/6281584225370" target="_blank" rel="noopener noreferrer" className="font-body text-gray-700 hover:underline">+6281584225370</a>
+              </div>
             </div>
             <div className="flex items-start space-x-4">
               <div className="w-6 h-6 mt-1 flex-shrink-0 text-gray-600">
                 
               </div>
-
+              <div>
+                <h3 className="font-body font-bold text-lg text-gray-900 mb-1">Office</h3>
+                <p className="font-body text-gray-700">Jl. Ganesha No. 10, Bandung, Indonesia</p>
+              </div>
             </div>
           </div>
         </div>
