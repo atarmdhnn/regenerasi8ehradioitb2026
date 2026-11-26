@@ -10,27 +10,10 @@ const decorations = [
   { src: "/vstock-aboutus-4.svg", className: "hidden md:block left-[14%] bottom-12 w-16 -rotate-12" },
 ];
 
-const decorations = [
-  { src: "/vstock-aboutus-1.svg", className: "hidden md:block right-[10%] top-8 w-28 -rotate-12" },
-  { src: "/vstock-aboutus-2.svg", className: "-right-10 bottom-[12%] w-32 rotate-12 md:-right-12 md:w-52" },
-  { src: "/vstock-aboutus-3.svg", className: "-left-12 top-4 w-36 -scale-x-100 md:-left-10 md:w-60" },
-  { src: "/vstock-aboutus-4.svg", className: "hidden md:block left-[14%] bottom-12 w-16 -rotate-12" },
-];
-
-function AboutHero() {
+export default function AboutUsPage() {
   return (
-    <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 text-center text-white bg-[radial-gradient(ellipse_at_50%_40%,#F7931E_0%,#F15A24_40%,#ffffff_85%)]">
-      {decorations.map(({ src, className }) => (
-        <Image
-          key={src}
-          src={src}
-          alt=""
-          aria-hidden="true"
-          width={400}
-          height={400}
-          className={`pointer-events-none absolute z-0 h-auto select-none ${className}`}
-        />
-      ))}
+    <div className="min-h-screen bg-white">
+      <Navbar />
 
       <main>
         <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 text-center">
@@ -56,13 +39,7 @@ function AboutHero() {
         </section>
       </main>
 
-export default function AboutUsPage() {
-  return (
-    <main>
-      <AboutHero />
-      <section id="our-journey" className="flex h-screen items-center justify-center">
-        Test
-      </section>
-    </main>
+      <FooterSection />
+    </div>
   );
 }
