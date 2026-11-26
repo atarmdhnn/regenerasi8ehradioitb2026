@@ -120,6 +120,7 @@ export default function AboutUsPage() {
           </div>
 
           {/* Tempat untuk Google Maps (Pakai iframe, ) */}
+          {/* HAPUS SETELAH DITAMBAHIN : cari sunken court di google maps -> bagikan -> sematkan peta -> salin HTML */}
           <div lassName="relative rounded-3xl overflow-hidden w-full mt-10">
             {/* taruh <iframe> disini,  tinggal paste aja, tapi ubah class di bagian akhir jadi className*/}
           </div>
