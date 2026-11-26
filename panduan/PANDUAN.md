@@ -1,8 +1,5 @@
 # Panduan Regenerasi 8EH Radio ITB 2026
 
-Panduan ini merangkum langkah dasar untuk mengerjakan halaman **Our Programs** dan **About Us**: alur Git per tim, menjalankan proyek, menulis JSX, styling tanpa Tailwind, font, dan gambar.
-
-> ⚠️ Panduan ini memakai pembagian **tim-1 = Our Programs** dan **tim-2 = About Us** dengan pull request ke `main`. [TUGAS.md](../TUGAS.md) memakai skema lain: setiap tim mengerjakan kedua halaman di branch `tim-<nomor>/main` dan tidak boleh merge ke `main`. Kalau ada perbedaan, ikuti arahan pengurus.
 
 ---
 
