@@ -38,7 +38,7 @@ export default function ProgramsPage() {
               justify-content: center;
             }
 
-            /* card base buat anau */
+            /* card base buat ana */
             .featured-card { 
               aspect-ratio: 3/4;
               width: 244px;
