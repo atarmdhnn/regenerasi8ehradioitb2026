@@ -118,6 +118,11 @@ export default function AboutUsPage() {
               </div>
             </div>
           </div>
+
+          {/* Tempat untuk Google Maps (Pakai iframe, ) */}
+          <div lassName="relative rounded-3xl overflow-hidden w-full mt-10">
+            {/* taruh <iframe> disini,  tinggal paste aja, tapi ubah class di bagian akhir jadi className*/}
+          </div>
         </div>
       </section>
       </main>
