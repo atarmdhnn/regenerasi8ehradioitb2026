@@ -36,7 +36,7 @@ export default function ProgramsPage() {
               grid-template-columns: repeat(3, auto);
               gap: 32px;
               align-items: center;
-              gap: 36px;
+              gap: 32px;
               justify-items: center;
               place-content: center;
             }
@@ -55,7 +55,7 @@ export default function ProgramsPage() {
               color: rgba(255, 255, 255, 0.6);
               font-size: 0.95rem;
               box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-              transition: all 0.25s ease-in-out;
+              transition: all 0.21s ease-in-out;
             }  
             .featured-card:hover {
               transform: scale(1.05); 
