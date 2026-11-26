@@ -10,10 +10,15 @@ export default function ProgramsPage() {
         <style>{`
           .featured-programs {
             font-family: var(--font-plus-jakarta-sans), sans-serif;
-            background: linear-gradient(180deg, #070707, #9e0000);
             padding: 60px;
             justify-content: center;
-          
+            background-image:
+              linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 1.0) 100%), 
+              url('/highlights-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
             .featured-container {
               margin: 0 auto;
               justify-content: center;
