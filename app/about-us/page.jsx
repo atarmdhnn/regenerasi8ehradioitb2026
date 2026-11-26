@@ -88,7 +88,7 @@ export default function AboutUsPage() {
 
               <div className="grid grid=cols-1 md:grid-cols-3 gap-8">
 
-                {discover8eh.mao((card) => {
+                {discover8eh.map((card) => {
                   const Icon = card.icon;
 
                   return (
@@ -112,7 +112,7 @@ export default function AboutUsPage() {
             </h2>
           </div>
         </section>
-        
+
         <section className="min-h-screen" />
 
         <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 text-center">
