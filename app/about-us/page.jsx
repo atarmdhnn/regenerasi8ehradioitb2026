@@ -51,6 +51,26 @@ const decorations = [
   { src: "/vstock-aboutus-3.svg", className: "-left-12 top-4 w-36 -scale-x-100 md:-left-10 md:w-60" },
   { src: "/vstock-aboutus-4.svg", className: "hidden md:block left-[14%] bottom-12 w-16 -rotate-12" },
 ];
+
+//icons discover
+const phoneicon = () => (
+  <svg 
+  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+  <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+  <path fillRule="evenodd" d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z" clipRule="evenodd" />
+</svg>
+);
+
+// bagian discover 8eh
+const discover8eh = [
+  {
+    num: 1,
+    icon: phoneicon,
+    title: "Creative Content Hub",
+    description: "Sebagai radio mahasiswa pertama di ITB, 8EH Radio hadir untuk menghadirkan konten yang tidak hanya menghibur, tapi juga menggugah pikiran dan menyuarakan aspirasi kampus.",
+  },
+];
+
 export default function AboutUsPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -58,6 +78,41 @@ export default function AboutUsPage() {
       <main>
 
         {/* TODO: Bangun ulang halaman "About Us" di sini. */}
+
+        {/* Bagian discover */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx auto">
+
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Discover the vibrant world of 8EH Radio ITB
+
+              <div className="grid grid=cols-1 md:grid-cols-3 gap-8">
+
+                {discover8eh.mao((card) => {
+                  const Icon = card.icon;
+
+                  return (
+                    <div
+                      key={card.num}
+                      className="p-8 rounded-2xl border-gray-200 hover:-translate-y-3 hover:shadow-xl transition-all duration-300"
+                    >
+                      <icon className="w-10 h-10 mb-6 text orange-500" />
+                      <h3 className="text-xl font-bold mb-3">
+                        {card.title}
+                      </h3>
+
+                      <p className="text-gray-600">
+                        {card.description}
+                      </p>
+                    </div>
+                  );
+                })}
+
+              </div>
+            </h2>
+          </div>
+        </section>
+        
         <section className="min-h-screen" />
 
         <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 text-center">
