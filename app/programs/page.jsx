@@ -32,10 +32,13 @@ export default function ProgramsPage() {
               color: #f8f8f8;
             }
             .featured-grid {
-              display: flex;
+              display: grid;
+              grid-template-columns: repeat(3, auto);
+              gap: 32px;
               align-items: center;
               gap: 36px;
-              justify-content: center;
+              justify-items: center;
+              place-content: center;
             }
 
             /* card base buat ana */
@@ -56,6 +59,21 @@ export default function ProgramsPage() {
             }  
             .featured-card:hover {
               transform: scale(1.05); 
+            }
+            @media  (max-width: 900px) {
+              .featured-grid {
+                grid-template-columns: repeat(2, auto);
+                gap: 28px;
+                max-width: 360px;
+                margin: 0 auto;
+              }
+            }
+            @media  (max-width: 600px) {
+              .featured-grid {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+                margin: 0 auto;
+              }
             }
           }
         `}</style>
