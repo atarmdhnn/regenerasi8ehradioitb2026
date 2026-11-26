@@ -79,40 +79,6 @@ export default function AboutUsPage() {
 
         {/* TODO: Bangun ulang halaman "About Us" di sini. */}
 
-        {/* Bagian discover */}
-        <section className="py-20 px-6">
-          <div className="max-w-6xl mx auto">
-
-            <h2 className="text-3xl font-bold text-center mb-12">
-              Discover the vibrant world of 8EH Radio ITB
-
-              <div className="grid grid=cols-1 md:grid-cols-3 gap-8">
-
-                {discover8eh.map((card) => {
-                  const Icon = card.icon;
-
-                  return (
-                    <div
-                      key={card.num}
-                      className="p-8 rounded-2xl border-gray-200 hover:-translate-y-3 hover:shadow-xl transition-all duration-300"
-                    >
-                      <icon className="w-10 h-10 mb-6 text orange-500" />
-                      <h3 className="text-xl font-bold mb-3">
-                        {card.title}
-                      </h3>
-
-                      <p className="text-gray-600">
-                        {card.description}
-                      </p>
-                    </div>
-                  );
-                })}
-
-              </div>
-            </h2>
-          </div>
-        </section>
-
         <section className="min-h-screen" />
 
         <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 text-center">
