@@ -53,7 +53,7 @@ const decorations = [
 ];
 
 //icons discover
-const phoneicon = () => (
+const phoneicon = ({ className }) => (
   <svg 
   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
   <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
@@ -136,7 +136,40 @@ export default function AboutUsPage() {
         <section id="our-journey" className="flex h-screen items-center justify-center">
           Test
         </section>
+        
+        {/* Bagian discover */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx auto">
 
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Discover the vibrant world of 8EH Radio ITB
+
+              <div className="grid grid=cols-1 md:grid-cols-3 gap-8">
+
+                {discover8eh.map((card) => {
+                  const Icon = card.icon;
+
+                  return (
+                    <div
+                      key={card.num}
+                      className="p-8 rounded-2xl border-gray-200 hover:-translate-y-3 hover:shadow-xl transition-all duration-300"
+                    >
+                      <icon className="w-10 h-10 mb-6 text orange-500" />
+                      <h3 className="text-xl font-bold mb-3">
+                        {card.title}
+                      </h3>
+
+                      <p className="text-gray-600">
+                        {card.description}
+                      </p>
+                    </div>
+                  );
+                })}
+
+              </div>
+            </h2>
+          </div>
+        </section>
 
       {/* Get In Touch. */}
       <section className="relative py-24 bg-gradient-to-b from-white via-yellow-100 to-orange-200">
