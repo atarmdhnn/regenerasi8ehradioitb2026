@@ -6,6 +6,18 @@ export default function ProgramsPage() {
     <main className="bg-[#FEFBF8] overflow-x-hidden font-sans">
       <Navbar />
 
+      <section className="hero-programs">
+
+      </section>
+
+      <section className="our-programs">
+
+      </section>
+
+      <section className="deretan-video">
+
+      </section>
+
       <section className="featured-programs">
         <style>{`
           .featured-programs {
@@ -91,6 +103,10 @@ export default function ProgramsPage() {
             </div>
           </div>
         </div>  
+      </section>
+
+      <section className="join-us">
+
       </section>
       <FooterSection />
     </main>
