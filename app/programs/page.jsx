@@ -53,7 +53,7 @@ export default function ProgramsPage() {
               place-content: center;
             }
 
-            /* card base buat ana */
+            /* card base buat anaura */
             .featured-card { 
               aspect-ratio: 3/4;
               width: 244px;
