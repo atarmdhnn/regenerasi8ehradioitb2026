@@ -102,7 +102,87 @@ export default function AboutUsPage() {
         <section id="our-journey" className="flex h-screen items-center justify-center">
           Test
         </section>
+
+
+
+
+
         
+{/* MANAGEMENT BOARD SECTION */}
+<section id="management-board" className="bg-white py-24 px-6">
+
+  <div className="max-w-6xl mx-auto">
+
+    {/* Heading */}
+    <div className="text-center mb-14">
+      <h2 className="font-accent text-4xl md:text-5xl font-bold tracking-wide text-gray-900">
+        MANAGEMENT BOARD
+      </h2>
+
+      <p className="font-body text-sm md:text-base text-gray-500 mt-3">
+        Temui para personel keren dibalik 8EH Radio ITB
+      </p>
+    </div>
+
+    {/* Organization Chart */}
+    <div className="flex flex-col items-center">
+
+      {/* General Manager */}
+      <div className="bg-red-600 text-white rounded-xl px-10 py-5 text-center shadow-md hover:-translate-y-1 transition duration-300">
+        <h3 className="font-bold text-sm">
+          General Manager
+        </h3>
+      </div>
+
+      {/* Connector */}
+      <div className="w-0.5 h-10 bg-red-300"></div>
+
+      {/* Division Boxes */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 w-full">
+
+        {[
+          "General Secretary",
+          "Human Resource Development Director",
+          "Research & Development Director",
+          "Brand Awareness Director",
+          "Station Director",
+          "Public Relations Director",
+        ].map((division, index) => (
+          <div
+            key={index}
+            className="relative flex flex-col items-center"
+          >
+
+            {/* Small connector */}
+            <div className="w-0.5 h-5 bg-red-300"></div>
+
+            {/* Division Card */}
+            <div className="w-full min-h-24 flex items-center justify-center text-center bg-red-600 text-white rounded-xl p-4 shadow-md hover:bg-red-700 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+
+              <h3 className="font-body font-semibold text-xs md:text-sm">
+                {division}
+              </h3>
+
+            </div>
+          </div>
+        ))}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        
+
+
+        
+
+
+
+      
+
+
         {/* Bagian discover */}
         <section className="py-20 px-6">
           <div className="max-w-6xl mx auto">
