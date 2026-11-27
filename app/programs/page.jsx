@@ -1,5 +1,7 @@
 import Navbar from "@/app/components/Navbar";
 import FooterSection from "@/app/components/FooterSection";
+import HeroPrograms from "../components/programs/HeroPrograms";
+
 
 export default function ProgramsPage() {
   return (
@@ -7,8 +9,8 @@ export default function ProgramsPage() {
       <Navbar />
 
       <section className="hero-programs">
-
-      </section>
+  <HeroPrograms />
+</section>
 
       <section className="our-programs">
 
