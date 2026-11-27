@@ -82,6 +82,29 @@ export default function AboutUsPage() {
               </div>
             </div>
           </div>
+          <div className="peta-lokasi">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0148092434033!2d107.60949991669142!3d-6.8888290166063415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6578d4253e7%3A0x136b7b51bcb1002d!2sSunken%20Court%2C%20ITB!5e0!3m2!1sid!2sid!4v1795771797679!5m2!1sid!2sid"
+            className="w-full h-100"
+            style={{border: 0}}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin">
+            </iframe>
+            <style>{`
+              .peta-lokasi {
+              margin-top: 48px;
+              border-radius: 16px;
+              overflow: hidden;
+              box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+              transition: all 0.3s;
+              }
+
+              .peta-lokasi:hover {
+              transform: translateY(-8px);
+              box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+              }
+              `}</style>
+          </div>
         </div>
       </section>
       </main>
