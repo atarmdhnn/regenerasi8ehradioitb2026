@@ -1,4 +1,4 @@
-export default function HeroPrograms() {
+export default function OurPrograms() {
   return (
     <section className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
       <p className="text-sm uppercase tracking-widest">bagian azam sm raden</p>
