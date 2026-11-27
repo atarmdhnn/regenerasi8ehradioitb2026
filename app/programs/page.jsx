@@ -105,9 +105,6 @@ export default function ProgramsPage() {
         </div>  
       </section>
 
-      <section className="join-us">
-
-      </section>
       <FooterSection />
     </main>
   );
