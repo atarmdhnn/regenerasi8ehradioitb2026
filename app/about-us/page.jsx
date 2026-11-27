@@ -172,13 +172,6 @@ export default function AboutUsPage() {
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-
-          {/* Tempat untuk Google Maps (Pakai iframe, ) */}
-          {/* HAPUS SETELAH DITAMBAHIN : cari sunken court di google maps -> bagikan -> sematkan peta -> salin HTML */}
-          <div lassName="relative rounded-3xl overflow-hidden w-full mt-10">
-            {/* taruh <iframe> disini,  tinggal paste aja, tapi ubah class di bagian akhir jadi className*/}
-=======
           <div className="peta-lokasi">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0148092434033!2d107.60949991669142!3d-6.8888290166063415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6578d4253e7%3A0x136b7b51bcb1002d!2sSunken%20Court%2C%20ITB!5e0!3m2!1sid!2sid!4v1795771797679!5m2!1sid!2sid"
             className="w-full h-100"
@@ -201,7 +194,6 @@ export default function AboutUsPage() {
               box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
               }
               `}</style>
->>>>>>> tim-2-kontak
           </div>
         </div>
       </section>
