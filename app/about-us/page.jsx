@@ -79,8 +79,6 @@ export default function AboutUsPage() {
 
         {/* TODO: Bangun ulang halaman "About Us" di sini. */}
 
-        <section className="min-h-screen" />
-
         <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 text-center text-white bg-[radial-gradient(ellipse_at_50%_40%,#F7931E_0%,#F15A24_40%,#ffffff_85%)]">
           {decorations.map(({ src, className }) => (
             <Image key={src} src={src} alt="" aria-hidden="true" width={400} height={400} className={`pointer-events-none absolute z-0 h-auto select-none ${className}`} />
