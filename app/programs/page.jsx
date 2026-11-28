@@ -1,6 +1,6 @@
 import Navbar from "@/app/components/Navbar";
 import FooterSection from "@/app/components/FooterSection";
-import OurPrograms from "../components/programs/OurPrograms";
+import OurPrograms from "@/app/components/programs/OurPrograms";
 
 export default function ProgramsPage() {
   return (
