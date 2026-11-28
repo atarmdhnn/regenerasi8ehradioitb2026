@@ -14,7 +14,13 @@ export default function ProgramsPage() {
 
       </section>
 
-      <section className="deretan-video">
+      <section className="deretan-video w-full bg-[#FEFBF8] px-6 py-10 md:px-12 Lg:px-20">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
+
+        </div>
+
+
+
 
       </section>
 
@@ -61,7 +67,7 @@ export default function ProgramsPage() {
           <div className="flex w-full flex-1 justify-center md:justify-end">
             <div className="w-full max-w-sm rounded-3xl border border-white/60 bg-white/30 p-4 shadow-xl shadow-gray-400/10 backdrop-blur-md">
 
-             <details className="group overflow-hidden rounded-2xl">
+              <details className="group overflow-hidden rounded-2xl">
 
                 {/* YouTube Image */}
                 <summary className="relative block cursor-pointer list-none">
