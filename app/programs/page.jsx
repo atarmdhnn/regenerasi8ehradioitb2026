@@ -89,25 +89,65 @@ export default function ProgramsPage() {
             }
           }
         `}</style>
-        <div className="featured-container">
-          <h2>Featured Programs</h2>
-          <div className="featured-grid">
-            <div className="featured-card">
-              <span>Poster1</span>
-            </div>
-            <div className="featured-card">
-              <span>Poster2</span>
-            </div>
-            <div className="featured-card">
-              <span>Poster3</span>
-            </div>
+        <style>{`
+        .featured-card {
+          overflow: hidden;
+          border: none;
+          display: block;
+          text-decoration: none;
+        }
+        .featured-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      `}</style>
+
+      <div className="featured-container">
+        <h2>Featured Programs</h2>
+        <div className="featured-grid">
+          <a
+            href="https://www.instagram.com/p/DKCKgOjyM9p/?lqvp=MW1yNnU5OXkxMTFhNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="featured-card"
+          >
+            <img
+              src="/featured programs/8GET2GETHER.jpg"
+              alt="Get2gether Dulu vs Sekarang"
+            />
+          </a>
+
+          <a
+            href="https://www.instagram.com/p/DL4t269Jt-B/?bqrl=amp1OWRuOGczeml5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="featured-card"
+          >
+            <img
+              src="/featured programs/CTRL.jpg"
+              alt="CTRL!"
+            />
+          </a>
+
+          <a
+            href="https://www.instagram.com/p/DMKN7O0pgbx/?knvt=aGZzbXhueDJvN3l6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="featured-card"
+          >
+            <img
+              src="/featured programs/KUMAL.jpg"
+              alt="KUMAL"
+            />
+            </a>
           </div>
-        </div>  
+        </div>
       </section>
 
-      <section className="join-us">
+      <section className="join-us"></section>
 
-      </section>
       <FooterSection />
     </main>
   );
