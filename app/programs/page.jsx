@@ -8,7 +8,7 @@ export default function ProgramsPage() {
       <Navbar />
 
       <section className="hero-programs">
-        <HeroPrograms/>
+      <HeroPrograms/>
       </section>
 
       <section className="our-programs">
